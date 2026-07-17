@@ -1,0 +1,341 @@
+{% extends "base.html" %}
+
+{% block title %}
+Task Details
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <div class="row justify-content-center">
+
+        <div class="col-xl-10">
+
+            <div class="card shadow border-0">
+
+                <div class="card-header bg-primary text-white">
+
+                    <h3 class="mb-0">
+
+                        <i class="bi bi-card-checklist me-2"></i>
+
+                        Task Details
+
+                    </h3>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+
+                            <table class="table table-bordered">
+
+                                <tr>
+                                    <th width="35%">Task Title</th>
+                                    <td>{{ task.title }}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Assigned To</th>
+                                    <td>{{ task.assigned_to.user.get_full_name }}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Assigned By</th>
+                                    <td>{{ task.assigned_by.get_full_name|default:task.assigned_by.username }}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Priority</th>
+                                    <td>
+
+                                        {% if task.priority == "CRITICAL" %}
+
+                                            <span class="badge bg-danger">
+
+                                                {{ task.get_priority_display }}
+
+                                            </span>
+
+                                        {% elif task.priority == "HIGH" %}
+
+                                            <span class="badge bg-warning text-dark">
+
+                                                {{ task.get_priority_display }}
+
+                                            </span>
+
+                                        {% elif task.priority == "MEDIUM" %}
+
+                                            <span class="badge bg-primary">
+
+                                                {{ task.get_priority_display }}
+
+                                            </span>
+
+                                        {% else %}
+
+                                            <span class="badge bg-success">
+
+                                                {{ task.get_priority_display }}
+
+                                            </span>
+
+                                        {% endif %}
+
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <th>Status</th>
+
+                                    <td>
+
+                                        {% if task.status == "COMPLETED" %}
+
+                                            <span class="badge bg-success">
+
+                                                {{ task.get_status_display }}
+
+                                            </span>
+
+                                        {% elif task.status == "IN_PROGRESS" %}
+
+                                            <span class="badge bg-primary">
+
+                                                {{ task.get_status_display }}
+
+                                            </span>
+
+                                        {% elif task.status == "REVIEW" %}
+
+                                            <span class="badge bg-info">
+
+                                                {{ task.get_status_display }}
+
+                                            </span>
+
+                                        {% elif task.status == "CANCELLED" %}
+
+                                            <span class="badge bg-danger">
+
+                                                {{ task.get_status_display }}
+
+                                            </span>
+
+                                        {% else %}
+
+                                            <span class="badge bg-warning text-dark">
+
+                                                {{ task.get_status_display }}
+
+                                            </span>
+
+                                        {% endif %}
+
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <th>Progress</th>
+
+                                    <td>
+
+                                        <div class="progress">
+
+                                            <div class="progress-bar bg-success"
+
+                                                 style="width:{{ task.progress }}%;">
+
+                                                {{ task.progress }}%
+
+                                            </div>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <th>Start Date</th>
+
+                                    <td>{{ task.start_date }}</td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <th>Due Date</th>
+
+                                    <td>{{ task.due_date }}</td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <th>Completed Date</th>
+
+                                    <td>{{ task.completed_date|default:"Not Completed" }}</td>
+
+                                </tr>
+
+                            </table>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <table class="table table-bordered">
+
+                                <tr>
+
+                                    <th width="35%">Description</th>
+
+                                    <td>{{ task.description }}</td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <th>Remarks</th>
+
+                                    <td>{{ task.remarks|default:"No remarks" }}</td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <th>Active</th>
+
+                                    <td>
+
+                                        {% if task.is_active %}
+
+                                            <span class="badge bg-success">
+
+                                                Yes
+
+                                            </span>
+
+                                        {% else %}
+
+                                            <span class="badge bg-danger">
+
+                                                No
+
+                                            </span>
+
+                                        {% endif %}
+
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <th>Created At</th>
+
+                                    <td>{{ task.created_at }}</td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <th>Updated At</th>
+
+                                    <td>{{ task.updated_at }}</td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <th>Overdue</th>
+
+                                    <td>
+
+                                        {% if task.is_overdue %}
+
+                                            <span class="badge bg-danger">
+
+                                                Yes
+
+                                            </span>
+
+                                        {% else %}
+
+                                            <span class="badge bg-success">
+
+                                                No
+
+                                            </span>
+
+                                        {% endif %}
+
+                                    </td>
+
+                                </tr>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-4">
+
+                        <a href="{% url 'tasks:task_list' %}"
+
+                           class="btn btn-secondary">
+
+                            <i class="bi bi-arrow-left-circle"></i>
+
+                            Back
+
+                        </a>
+
+                        <div>
+
+                            <a href="{% url 'tasks:update_task' task.pk %}"
+
+                               class="btn btn-warning">
+
+                                <i class="bi bi-pencil-square"></i>
+
+                                Edit
+
+                            </a>
+
+                            <a href="{% url 'tasks:delete_task' task.pk %}"
+
+                               class="btn btn-danger">
+
+                                <i class="bi bi-trash-fill"></i>
+
+                                Delete
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

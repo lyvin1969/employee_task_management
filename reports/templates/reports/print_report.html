@@ -1,0 +1,263 @@
+{% extends "base.html" %}
+
+{% block title %}
+Print Report
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="d-print-none mb-4 d-flex justify-content-between">
+
+        <a href="{% url 'reports:report_home' %}"
+           class="btn btn-secondary">
+
+            <i class="bi bi-arrow-left"></i>
+
+            Back
+
+        </a>
+
+        <button onclick="window.print()"
+                class="btn btn-primary">
+
+            <i class="bi bi-printer-fill"></i>
+
+            Print Report
+
+        </button>
+
+    </div>
+
+    <div class="text-center mb-4">
+
+        <h2 class="fw-bold">
+
+            Employee Task Management System
+
+        </h2>
+
+        <h4>
+
+            System Report
+
+        </h4>
+
+        <hr>
+
+    </div>
+
+    <div class="row text-center mb-5">
+
+        <div class="col-md-3">
+
+            <div class="border rounded p-3">
+
+                <h3>{{ employee_count }}</h3>
+
+                <p>Total Employees</p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="border rounded p-3">
+
+                <h3>{{ department_count }}</h3>
+
+                <p>Total Departments</p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="border rounded p-3">
+
+                <h3>{{ task_count }}</h3>
+
+                <p>Total Tasks</p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="border rounded p-3">
+
+                <h3>{{ overdue_tasks }}</h3>
+
+                <p>Overdue Tasks</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <h4 class="mb-3">
+
+        Recent Employees
+
+    </h4>
+
+    <table class="table table-bordered">
+
+        <thead class="table-light">
+
+            <tr>
+
+                <th>#</th>
+
+                <th>Name</th>
+
+                <th>Job Title</th>
+
+                <th>Status</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for employee in recent_employees %}
+
+            <tr>
+
+                <td>{{ forloop.counter }}</td>
+
+                <td>{{ employee.user.get_full_name }}</td>
+
+                <td>{{ employee.job_title }}</td>
+
+                <td>{{ employee.status }}</td>
+
+            </tr>
+
+            {% empty %}
+
+            <tr>
+
+                <td colspan="4" class="text-center">
+
+                    No employee records.
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    <br>
+
+    <h4 class="mb-3">
+
+        Recent Tasks
+
+    </h4>
+
+    <table class="table table-bordered">
+
+        <thead class="table-light">
+
+            <tr>
+
+                <th>#</th>
+
+                <th>Task</th>
+
+                <th>Assigned To</th>
+
+                <th>Status</th>
+
+                <th>Progress</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for task in recent_tasks %}
+
+            <tr>
+
+                <td>{{ forloop.counter }}</td>
+
+                <td>{{ task.title }}</td>
+
+                <td>{{ task.assigned_to.user.get_full_name }}</td>
+
+                <td>{{ task.get_status_display }}</td>
+
+                <td>{{ task.progress }}%</td>
+
+            </tr>
+
+            {% empty %}
+
+            <tr>
+
+                <td colspan="5" class="text-center">
+
+                    No task records.
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    <div class="mt-5 text-end">
+
+        <p>
+
+            Generated on:
+
+            <strong>
+
+                {% now "F d, Y H:i" %}
+
+            </strong>
+
+        </p>
+
+    </div>
+
+</div>
+
+<style>
+
+@media print{
+
+    .d-print-none{
+
+        display:none !important;
+
+    }
+
+    body{
+
+        background:white;
+
+    }
+
+}
+
+</style>
+
+{% endblock %}

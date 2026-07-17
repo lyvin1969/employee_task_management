@@ -1,0 +1,261 @@
+{% extends "base.html" %}
+
+{% block title %}
+Performance Report
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h2 class="fw-bold">
+
+                <i class="bi bi-graph-up-arrow text-primary"></i>
+
+                Employee Performance Report
+
+            </h2>
+
+            <p class="text-muted">
+
+                Performance analysis based on assigned tasks.
+
+            </p>
+
+        </div>
+
+        <a href="{% url 'reports:report_home' %}"
+           class="btn btn-secondary">
+
+            <i class="bi bi-arrow-left-circle"></i>
+
+            Back to Reports
+
+        </a>
+
+    </div>
+
+    <!-- Summary -->
+
+    <div class="row mb-4">
+
+        <div class="col-md-4">
+
+            <div class="card shadow-sm border-0">
+
+                <div class="card-body text-center">
+
+                    <i class="bi bi-list-check fs-1 text-primary"></i>
+
+                    <h2>{{ tasks|length }}</h2>
+
+                    <p class="text-muted">
+
+                        Total Tasks Evaluated
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Performance Table -->
+
+    <div class="card shadow-sm border-0">
+
+        <div class="card-header bg-primary text-white">
+
+            <h5 class="mb-0">
+
+                Employee Performance Summary
+
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover table-striped align-middle">
+
+                    <thead class="table-dark">
+
+                        <tr>
+
+                            <th>#</th>
+
+                            <th>Employee</th>
+
+                            <th>Task</th>
+
+                            <th>Status</th>
+
+                            <th>Progress</th>
+
+                            <th>Completed Date</th>
+
+                            <th>Performance</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for task in tasks %}
+
+                        <tr>
+
+                            <td>{{ forloop.counter }}</td>
+
+                            <td>{{ task.assigned_to.user.get_full_name }}</td>
+
+                            <td>{{ task.title }}</td>
+
+                            <td>
+
+                                {% if task.status == "COMPLETED" %}
+
+                                    <span class="badge bg-success">
+
+                                        {{ task.get_status_display }}
+
+                                    </span>
+
+                                {% elif task.status == "IN_PROGRESS" %}
+
+                                    <span class="badge bg-primary">
+
+                                        {{ task.get_status_display }}
+
+                                    </span>
+
+                                {% elif task.status == "REVIEW" %}
+
+                                    <span class="badge bg-info">
+
+                                        {{ task.get_status_display }}
+
+                                    </span>
+
+                                {% elif task.status == "CANCELLED" %}
+
+                                    <span class="badge bg-danger">
+
+                                        {{ task.get_status_display }}
+
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="badge bg-warning text-dark">
+
+                                        {{ task.get_status_display }}
+
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td style="width:220px;">
+
+                                <div class="progress">
+
+                                    <div class="progress-bar bg-success"
+
+                                         role="progressbar"
+
+                                         style="width:{{ task.progress }}%;">
+
+                                        {{ task.progress }}%
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+
+                                {{ task.completed_date|default:"Not Completed" }}
+
+                            </td>
+
+                            <td>
+
+                                {% if task.progress >= 100 %}
+
+                                    <span class="badge bg-success">
+
+                                        Excellent
+
+                                    </span>
+
+                                {% elif task.progress >= 75 %}
+
+                                    <span class="badge bg-primary">
+
+                                        Good
+
+                                    </span>
+
+                                {% elif task.progress >= 50 %}
+
+                                    <span class="badge bg-warning text-dark">
+
+                                        Average
+
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="badge bg-danger">
+
+                                        Needs Improvement
+
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+
+                            <td colspan="7"
+                                class="text-center text-muted">
+
+                                No performance data available.
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

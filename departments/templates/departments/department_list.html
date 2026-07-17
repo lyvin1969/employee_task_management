@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block title %}
+Departments
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h2 class="fw-bold">
+
+                <i class="bi bi-building text-primary"></i>
+
+                Department Management
+
+            </h2>
+
+            <p class="text-muted">
+
+                Manage all company departments.
+
+            </p>
+
+        </div>
+
+        <a href="{% url 'departments:create_department' %}"
+           class="btn btn-primary">
+
+            <i class="bi bi-building-add"></i>
+
+            Add Department
+
+        </a>
+
+    </div>
+
+    <div class="card shadow-sm">
+
+        <div class="card-body">
+
+            <form method="GET"
+                  action="{% url 'departments:search_department' %}"
+                  class="mb-4">
+
+                <div class="input-group">
+
+                    <input type="text"
+                           name="q"
+                           value="{{ query }}"
+                           class="form-control"
+                           placeholder="Search department...">
+
+                    <button class="btn btn-primary">
+
+                        <i class="bi bi-search"></i>
+
+                        Search
+
+                    </button>
+
+                </div>
+
+            </form>
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>#</th>
+
+                            <th>Department</th>
+
+                            <th>Manager</th>
+
+                            <th>Employees</th>
+
+                            <th>Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for department in departments %}
+                                                <tr>
+
+                            <td>{{ forloop.counter }}</td>
+
+                            <td>{{ department.name }}</td>
+
+                            <td>{{ department.manager }}</td>
+
+                            <td>{{ department.employee_count }}</td>
+
+                            <td>
+
+                                <a href="{% url 'departments:department_detail' department.pk %}"
+                                   class="btn btn-info btn-sm text-white">
+
+                                    <i class="bi bi-eye-fill"></i>
+
+                                </a>
+
+                                <a href="{% url 'departments:update_department' department.pk %}"
+                                   class="btn btn-warning btn-sm">
+
+                                    <i class="bi bi-pencil-fill"></i>
+
+                                </a>
+
+                                <a href="{% url 'departments:delete_department' department.pk %}"
+                                   class="btn btn-danger btn-sm">
+
+                                    <i class="bi bi-trash-fill"></i>
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+
+                            <td colspan="5" class="text-center text-muted py-4">
+
+                                No departments found.
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

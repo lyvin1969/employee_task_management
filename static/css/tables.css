@@ -1,0 +1,249 @@
+/* ==========================================
+   TABLES
+========================================== */
+
+.table-responsive{
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+}
+
+/* Main Table */
+
+.table{
+
+    width:100%;
+
+    background:#fff;
+
+    border-collapse:collapse;
+
+    margin-bottom:0;
+
+}
+
+/* Header */
+
+.table thead{
+
+    background:#0d6efd;
+
+    color:#fff;
+
+}
+
+.table thead th{
+
+    border:none;
+
+    padding:15px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    vertical-align:middle;
+
+    white-space:nowrap;
+
+}
+
+/* Body */
+
+.table tbody td{
+
+    padding:14px;
+
+    font-size:14px;
+
+    vertical-align:middle;
+
+    border-color:#eef2f7;
+
+}
+
+/* Zebra */
+
+.table tbody tr:nth-child(even){
+
+    background:#fafbfd;
+
+}
+
+/* Hover */
+
+.table-hover tbody tr:hover{
+
+    background:#eef5ff;
+
+    transition:.25s;
+
+}
+
+/* Images */
+
+.table img{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+}
+
+/* Action Buttons */
+
+.table .btn{
+
+    padding:6px 10px;
+
+    font-size:13px;
+
+    border-radius:8px;
+
+    margin-right:4px;
+
+}
+
+/* Badge */
+
+.table .badge{
+
+    padding:6px 10px;
+
+    border-radius:20px;
+
+    font-size:12px;
+
+}
+
+/* Success */
+
+.badge-success{
+
+    background:#198754;
+
+    color:#fff;
+
+}
+
+/* Warning */
+
+.badge-warning{
+
+    background:#ffc107;
+
+    color:#000;
+
+}
+
+/* Danger */
+
+.badge-danger{
+
+    background:#dc3545;
+
+    color:#fff;
+
+}
+
+/* Info */
+
+.badge-info{
+
+    background:#0dcaf0;
+
+    color:#fff;
+
+}
+
+/* Primary */
+
+.badge-primary{
+
+    background:#0d6efd;
+
+    color:#fff;
+
+}
+
+/* Search Box */
+
+.table-search{
+
+    max-width:350px;
+
+}
+
+/* Pagination */
+
+.pagination{
+
+    margin-top:20px;
+
+    justify-content:center;
+
+}
+
+.pagination .page-link{
+
+    border-radius:8px;
+
+    margin:0 4px;
+
+    color:#0d6efd;
+
+}
+
+.pagination .page-item.active .page-link{
+
+    background:#0d6efd;
+
+    border-color:#0d6efd;
+
+}
+
+/* Empty Records */
+
+.table-empty{
+
+    text-align:center;
+
+    padding:35px;
+
+    color:#999;
+
+    font-size:15px;
+
+}
+
+/* Table Card */
+
+.table-card{
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+    background:#fff;
+
+    box-shadow:0 6px 20px rgba(0,0,0,.08);
+
+}
+
+/* Sticky Header */
+
+.table thead th{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:2;
+
+}

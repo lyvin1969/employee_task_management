@@ -1,0 +1,578 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <!-- ==========================
+         PAGE HEADER
+    =========================== -->
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h2 class="fw-bold mb-1">
+
+                <i class="bi bi-speedometer2 text-primary"></i>
+
+                Dashboard
+
+            </h2>
+
+            <p class="text-muted">
+
+                Welcome back,
+                <strong>{{ user.get_full_name|default:user.username }}</strong>
+
+            </p>
+
+        </div>
+
+        <div class="d-flex gap-2 flex-wrap">
+
+            <a href="{% url 'employees:create_employee' %}"
+               class="btn btn-primary">
+
+                <i class="bi bi-person-plus"></i>
+
+                Employee
+
+            </a>
+
+            <a href="{% url 'departments:create_department' %}"
+               class="btn btn-success">
+
+                <i class="bi bi-building-add"></i>
+
+                Department
+
+            </a>
+
+            <a href="{% url 'tasks:create_task' %}"
+               class="btn btn-warning text-dark">
+
+                <i class="bi bi-list-task"></i>
+
+                Task
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- ==========================
+         STATISTICS
+    =========================== -->
+
+    <div class="row g-4">
+
+        <div class="col-xl-3 col-md-6">
+
+            <div class="card stats-card bg-primary text-white">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <small>Total Employees</small>
+
+                            <h2>
+
+                                {{ employee_count }}
+
+                            </h2>
+
+                        </div>
+
+                        <i class="bi bi-people-fill"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+
+            <div class="card stats-card bg-success text-white">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <small>Departments</small>
+
+                            <h2>
+
+                                {{ department_count }}
+
+                            </h2>
+
+                        </div>
+
+                        <i class="bi bi-building"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+
+            <div class="card stats-card bg-warning">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <small>Total Tasks</small>
+
+                            <h2>
+
+                                {{ task_count }}
+
+                            </h2>
+
+                        </div>
+
+                        <i class="bi bi-list-task"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+
+            <div class="card stats-card bg-danger text-white">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <small>Overdue Tasks</small>
+
+                            <h2>
+
+                                {{ overdue_tasks }}
+
+                            </h2>
+
+                        </div>
+
+                        <i class="bi bi-exclamation-triangle-fill"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+        <!-- ==========================================
+         TASK SUMMARY & QUICK ACTIONS
+    =========================================== -->
+
+    <div class="row mt-2">
+
+        <!-- Task Summary -->
+
+        <div class="col-lg-6">
+
+            <div class="card">
+
+                <div class="card-header d-flex justify-content-between align-items-center">
+
+                    <h5 class="mb-0">
+
+                        <i class="bi bi-bar-chart-line-fill text-primary"></i>
+
+                        Task Summary
+
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <table class="table table-hover align-middle">
+
+                        <tbody>
+
+                            <tr>
+
+                                <td>
+
+                                    <span class="badge bg-warning">
+
+                                        Pending
+
+                                    </span>
+
+                                </td>
+
+                                <td class="text-end fw-bold">
+
+                                    {{ pending_tasks }}
+
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td>
+
+                                    <span class="badge bg-info">
+
+                                        In Progress
+
+                                    </span>
+
+                                </td>
+
+                                <td class="text-end fw-bold">
+
+                                    {{ in_progress_tasks }}
+
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td>
+
+                                    <span class="badge bg-primary">
+
+                                        Under Review
+
+                                    </span>
+
+                                </td>
+
+                                <td class="text-end fw-bold">
+
+                                    {{ review_tasks }}
+
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td>
+
+                                    <span class="badge bg-success">
+
+                                        Completed
+
+                                    </span>
+
+                                </td>
+
+                                <td class="text-end fw-bold">
+
+                                    {{ completed_tasks }}
+
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td>
+
+                                    <span class="badge bg-danger">
+
+                                        Cancelled
+
+                                    </span>
+
+                                </td>
+
+                                <td class="text-end fw-bold">
+
+                                    {{ cancelled_tasks }}
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Quick Actions -->
+
+        <div class="col-lg-6">
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <h5 class="mb-0">
+
+                        <i class="bi bi-lightning-charge-fill text-warning"></i>
+
+                        Quick Actions
+
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+
+                            <a href="{% url 'employees:create_employee' %}"
+                               class="btn btn-primary w-100">
+
+                                <i class="bi bi-person-plus-fill"></i>
+
+                                Add Employee
+
+                            </a>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <a href="{% url 'departments:create_department' %}"
+                               class="btn btn-success w-100">
+
+                                <i class="bi bi-building-add"></i>
+
+                                Add Department
+
+                            </a>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <a href="{% url 'tasks:create_task' %}"
+                               class="btn btn-warning w-100">
+
+                                <i class="bi bi-list-task"></i>
+
+                                Create Task
+
+                            </a>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <a href="{% url 'reports:report_home' %}"
+                               class="btn btn-dark w-100">
+
+                                <i class="bi bi-bar-chart-fill"></i>
+
+                                Reports
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ==========================================
+         RECENT TASKS
+    =========================================== -->
+
+    <div class="card mt-4">
+
+        <div class="card-header d-flex justify-content-between align-items-center">
+
+            <h5 class="mb-0">
+
+                <i class="bi bi-list-task text-success"></i>
+
+                Recent Tasks
+
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Title</th>
+
+                            <th>Employee</th>
+
+                            <th>Status</th>
+
+                            <th>Due Date</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for task in recent_tasks %}
+
+                        <tr>
+
+                            <td>{{ task.title }}</td>
+
+                            <td>{{ task.assigned_to }}</td>
+
+                            <td>{{ task.get_status_display }}</td>
+
+                            <td>{{ task.due_date }}</td>
+
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+
+                            <td colspan="4" class="text-center py-4">
+
+                                No recent tasks available.
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ==========================================
+         RECENT EMPLOYEES
+    =========================================== -->
+
+    <div class="card mt-4">
+
+        <div class="card-header">
+
+            <h5 class="mb-0">
+
+                <i class="bi bi-people-fill text-primary"></i>
+
+                Recently Added Employees
+
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Name</th>
+
+                            <th>Department</th>
+
+                            <th>Email</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for employee in recent_employees %}
+
+                        <tr>
+
+                            <td>{{ employee }}</td>
+
+                            <td>{{ employee.department }}</td>
+
+                            <td>{{ employee.email }}</td>
+
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+
+                            <td colspan="3" class="text-center py-4">
+
+                                No employees found.
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

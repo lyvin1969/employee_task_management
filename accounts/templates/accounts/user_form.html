@@ -1,0 +1,220 @@
+{% extends "base.html" %}
+
+{% block title %}
+{% if user %}
+Update User
+{% else %}
+Create User
+{% endif %}
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-primary text-white">
+
+                    <h3 class="mb-0">
+
+                        {% if user %}
+                            <i class="bi bi-pencil-square"></i>
+                            Update User
+                        {% else %}
+                            <i class="bi bi-person-plus-fill"></i>
+                            Create User
+                        {% endif %}
+
+                    </h3>
+
+                </div>
+
+                <div class="card-body">
+
+                    <form method="POST" enctype="multipart/form-data">
+
+                        {% csrf_token %}
+
+                        {% if form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {{ form.non_field_errors }}
+                        </div>
+                        {% endif %}
+
+                        <div class="row">
+
+                            <!-- First Name -->
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    First Name
+                                </label>
+
+                                {{ form.first_name }}
+
+                                <div class="text-danger small">
+                                    {{ form.first_name.errors }}
+                                </div>
+
+                            </div>
+
+                            <!-- Last Name -->
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    Last Name
+                                </label>
+
+                                {{ form.last_name }}
+
+                                <div class="text-danger small">
+                                    {{ form.last_name.errors }}
+                                </div>
+
+                            </div>
+
+                            <!-- Username -->
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    Username
+                                </label>
+
+                                {{ form.username }}
+
+                                <div class="text-danger small">
+                                    {{ form.username.errors }}
+                                </div>
+
+                            </div>
+
+                            <!-- Email -->
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    Email
+                                </label>
+
+                                {{ form.email }}
+
+                                <div class="text-danger small">
+                                    {{ form.email.errors }}
+                                </div>
+
+                            </div>
+
+                            <!-- Phone -->
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    Phone Number
+                                </label>
+
+                                {{ form.phone }}
+
+                                <div class="text-danger small">
+                                    {{ form.phone.errors }}
+                                </div>
+
+                            </div>
+
+                            <!-- Role -->
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    Role
+                                </label>
+
+                                {{ form.role }}
+
+                                <div class="text-danger small">
+                                    {{ form.role.errors }}
+                                </div>
+
+                            </div>
+
+                            <!-- Profile Picture -->
+                            <div class="col-12 mb-3">
+
+                                <label class="form-label">
+                                    Profile Picture
+                                </label>
+
+                                {{ form.profile_picture }}
+
+                                <div class="text-danger small">
+                                    {{ form.profile_picture.errors }}
+                                </div>
+
+                            </div>
+
+                            <!-- Active Status -->
+                            {% if form.is_active %}
+
+                            <div class="col-12 mb-3">
+
+                                <div class="form-check">
+
+                                    {{ form.is_active }}
+
+                                    <label class="form-check-label">
+
+                                        Active Account
+
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                            {% endif %}
+
+                        </div>
+
+                        <hr>
+
+                        <div class="d-flex justify-content-between">
+
+                            <a href="{% url 'accounts:user_list' %}"
+                               class="btn btn-secondary">
+
+                                <i class="bi bi-arrow-left"></i>
+
+                                Back
+
+                            </a>
+
+                            <button
+                                type="submit"
+                                class="btn btn-primary">
+
+                                <i class="bi bi-check-circle"></i>
+
+                                {% if user %}
+                                    Update User
+                                {% else %}
+                                    Save User
+                                {% endif %}
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,180 @@
+<nav class="navbar navbar-expand-lg">
+
+    <div class="container-fluid">
+
+        <!-- Mobile Sidebar Toggle -->
+
+        <button
+            class="btn btn-light d-lg-none me-3"
+            id="sidebarToggle">
+
+            <i class="bi bi-list fs-4"></i>
+
+        </button>
+
+        <!-- Search -->
+
+        <div class="search-box d-none d-md-block">
+
+            <i class="bi bi-search"></i>
+
+            <input
+                type="text"
+                class="form-control"
+                placeholder="Search employees, departments, tasks...">
+
+        </div>
+
+        <!-- Right Side -->
+
+        <div class="navbar-right ms-auto">
+
+            <!-- Notifications -->
+
+            <div class="dropdown">
+
+                <a
+                    class="nav-link position-relative"
+                    href="#"
+                    data-bs-toggle="dropdown">
+
+                    <i class="bi bi-bell-fill fs-5"></i>
+
+                    <span class="notification-badge">
+
+                        3
+
+                    </span>
+
+                </a>
+
+                <ul class="dropdown-menu dropdown-menu-end">
+
+                    <li>
+
+                        <h6 class="dropdown-header">
+
+                            Notifications
+
+                        </h6>
+
+                    </li>
+
+                    <li>
+
+                        <a class="dropdown-item" href="#">
+
+                            New employee added
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a class="dropdown-item" href="#">
+
+                            Task deadline approaching
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a class="dropdown-item" href="#">
+
+                            Department updated
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <!-- User -->
+
+            <div class="dropdown">
+
+                <a
+                    href="#"
+                    class="d-flex align-items-center text-decoration-none"
+                    data-bs-toggle="dropdown">
+
+                    <i class="bi bi-person-circle fs-2 text-primary"></i>
+
+                    <div class="ms-2 d-none d-md-block">
+
+                        <div class="fw-semibold">
+
+                            {{ user.get_full_name|default:user.username }}
+
+                        </div>
+
+                        <small class="text-muted">
+
+                            {{ user.role|default:"Administrator" }}
+
+                        </small>
+
+                    </div>
+
+                </a>
+
+                <ul class="dropdown-menu dropdown-menu-end">
+
+                    <li>
+
+                        <a
+                            class="dropdown-item"
+                            href="{% url 'accounts:profile' %}">
+
+                            <i class="bi bi-person"></i>
+
+                            My Profile
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a
+                            class="dropdown-item"
+                            href="{% url 'accounts:change_password' %}">
+
+                            <i class="bi bi-key"></i>
+
+                            Change Password
+
+                        </a>
+
+                    </li>
+
+                    <li><hr class="dropdown-divider"></li>
+
+                    <li>
+
+                        <a
+                            class="dropdown-item text-danger"
+                            href="{% url 'accounts:logout' %}">
+
+                            <i class="bi bi-box-arrow-right"></i>
+
+                            Logout
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</nav>

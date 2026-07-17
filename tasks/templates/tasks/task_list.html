@@ -1,0 +1,351 @@
+{% extends "base.html" %}
+
+{% block title %}
+Task Management
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h2 class="fw-bold">
+
+                <i class="bi bi-list-check text-primary"></i>
+
+                Task Management
+
+            </h2>
+
+            <p class="text-muted">
+
+                Manage employee tasks and monitor progress.
+
+            </p>
+
+        </div>
+
+        <a href="{% url 'tasks:create_task' %}"
+           class="btn btn-primary">
+
+            <i class="bi bi-plus-circle"></i>
+
+            Create Task
+
+        </a>
+
+    </div>
+
+    <div class="row mb-4">
+
+        <div class="col-md-3">
+
+            <div class="card shadow-sm border-0">
+
+                <div class="card-body text-center">
+
+                    <i class="bi bi-hourglass text-warning fs-1"></i>
+
+                    <h2>{{ pending_count }}</h2>
+
+                    <p class="text-muted">
+
+                        Pending
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card shadow-sm border-0">
+
+                <div class="card-body text-center">
+
+                    <i class="bi bi-check-circle-fill text-success fs-1"></i>
+
+                    <h2>{{ completed_count }}</h2>
+
+                    <p class="text-muted">
+
+                        Completed
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card shadow-sm border-0">
+
+                <div class="card-body text-center">
+
+                    <i class="bi bi-exclamation-circle-fill text-danger fs-1"></i>
+
+                    <h2>{{ overdue_count }}</h2>
+
+                    <p class="text-muted">
+
+                        Overdue
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card shadow-sm border-0">
+
+                <div class="card-body text-center">
+
+                    <i class="bi bi-list-task text-primary fs-1"></i>
+
+                    <h2>{{ total_tasks }}</h2>
+
+                    <p class="text-muted">
+
+                        Total Tasks
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <form method="GET"
+          action="{% url 'tasks:search_task' %}"
+          class="mb-4">
+
+        <div class="input-group">
+
+            <input
+                type="text"
+                name="q"
+                value="{{ query }}"
+                class="form-control"
+                placeholder="Search task...">
+
+            <button class="btn btn-primary">
+
+                <i class="bi bi-search"></i>
+
+                Search
+
+            </button>
+
+        </div>
+
+    </form>
+
+    <div class="card shadow-sm">
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>#</th>
+
+                            <th>Task</th>
+
+                            <th>Employee</th>
+
+                            <th>Status</th>
+
+                            <th>Priority</th>
+
+                            <th>Due Date</th>
+
+                            <th>Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for task in tasks %}
+                        <tr>
+
+    <td>{{ forloop.counter }}</td>
+
+    <td>
+
+        <strong>{{ task.title }}</strong>
+
+    </td>
+
+    <td>
+
+        {{ task.assigned_to.user.get_full_name }}
+
+    </td>
+
+    <td>
+
+        {% if task.status == "COMPLETED" %}
+
+            <span class="badge bg-success">
+
+                {{ task.get_status_display }}
+
+            </span>
+
+        {% elif task.status == "IN_PROGRESS" %}
+
+            <span class="badge bg-primary">
+
+                {{ task.get_status_display }}
+
+            </span>
+
+        {% elif task.status == "REVIEW" %}
+
+            <span class="badge bg-info">
+
+                {{ task.get_status_display }}
+
+            </span>
+
+        {% elif task.status == "CANCELLED" %}
+
+            <span class="badge bg-danger">
+
+                {{ task.get_status_display }}
+
+            </span>
+
+        {% else %}
+
+            <span class="badge bg-warning text-dark">
+
+                {{ task.get_status_display }}
+
+            </span>
+
+        {% endif %}
+
+    </td>
+
+    <td>
+
+        {% if task.priority == "CRITICAL" %}
+
+            <span class="badge bg-danger">
+
+                {{ task.get_priority_display }}
+
+            </span>
+
+        {% elif task.priority == "HIGH" %}
+
+            <span class="badge bg-warning text-dark">
+
+                {{ task.get_priority_display }}
+
+            </span>
+
+        {% elif task.priority == "MEDIUM" %}
+
+            <span class="badge bg-primary">
+
+                {{ task.get_priority_display }}
+
+            </span>
+
+        {% else %}
+
+            <span class="badge bg-success">
+
+                {{ task.get_priority_display }}
+
+            </span>
+
+        {% endif %}
+
+    </td>
+
+    <td>
+
+        {{ task.due_date }}
+
+    </td>
+
+    <td>
+
+        <a href="{% url 'tasks:task_detail' task.pk %}"
+           class="btn btn-info btn-sm">
+
+            View
+
+        </a>
+
+        <a href="{% url 'tasks:update_task' task.pk %}"
+           class="btn btn-warning btn-sm">
+
+            Edit
+
+        </a>
+
+        <a href="{% url 'tasks:delete_task' task.pk %}"
+           class="btn btn-danger btn-sm">
+
+            Delete
+
+        </a>
+
+    </td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+
+    <td colspan="7" class="text-center text-muted">
+
+        No tasks found.
+
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

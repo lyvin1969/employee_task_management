@@ -1,0 +1,335 @@
+/* ==========================================
+   DASHBOARD PAGE
+========================================== */
+
+/* Dashboard Header */
+
+.dashboard-header{
+
+    margin-bottom:30px;
+
+}
+
+.dashboard-header h2{
+
+    font-size:28px;
+
+    font-weight:700;
+
+    color:#2b2d42;
+
+}
+
+.dashboard-header p{
+
+    color:#6c757d;
+
+    font-size:14px;
+
+}
+
+/* ==========================================
+   STATISTICS CARDS
+========================================== */
+
+.stats-card{
+
+    border:none;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    transition:.3s;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+}
+
+.stats-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 18px 35px rgba(0,0,0,.12);
+
+}
+
+.stats-card .card-body{
+
+    padding:24px;
+
+}
+
+.stats-card small{
+
+    display:block;
+
+    font-size:13px;
+
+    opacity:.9;
+
+    margin-bottom:10px;
+
+}
+
+.stats-card h2{
+
+    font-size:34px;
+
+    font-weight:700;
+
+    margin:0;
+
+}
+
+.stats-card i{
+
+    font-size:48px;
+
+    opacity:.25;
+
+}
+
+/* ==========================================
+   CARDS
+========================================== */
+
+.dashboard-card{
+
+    border:none;
+
+    border-radius:18px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+}
+
+.dashboard-card .card-header{
+
+    background:#fff;
+
+    padding:18px 22px;
+
+    border-bottom:1px solid #eef2f7;
+
+    font-weight:600;
+
+}
+
+.dashboard-card .card-body{
+
+    padding:22px;
+
+}
+
+/* ==========================================
+   QUICK ACTION BUTTONS
+========================================== */
+
+.quick-actions .btn{
+
+    border-radius:12px;
+
+    padding:12px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.quick-actions .btn:hover{
+
+    transform:translateY(-3px);
+
+}
+
+/* ==========================================
+   TABLES
+========================================== */
+
+.dashboard-table{
+
+    margin-bottom:0;
+
+}
+
+.dashboard-table thead th{
+
+    background:#0d6efd;
+
+    color:#fff;
+
+    border:none;
+
+    padding:15px;
+
+    font-size:14px;
+
+}
+
+.dashboard-table tbody td{
+
+    padding:15px;
+
+    vertical-align:middle;
+
+}
+
+.dashboard-table tbody tr:hover{
+
+    background:#f5f9ff;
+
+}
+
+/* ==========================================
+   BADGES
+========================================== */
+
+.status-badge{
+
+    padding:7px 12px;
+
+    border-radius:20px;
+
+    font-size:12px;
+
+    font-weight:600;
+
+}
+
+/* ==========================================
+   ICONS
+========================================== */
+
+.card-header i{
+
+    margin-right:8px;
+
+}
+
+/* ==========================================
+   SPACING
+========================================== */
+
+.card{
+
+    margin-bottom:25px;
+
+}
+
+.table-responsive{
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+}
+
+/* ==========================================
+   ANIMATION
+========================================== */
+
+.card{
+
+    animation:fadeUp .4s ease;
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(15px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width:1200px){
+
+.stats-card h2{
+
+    font-size:30px;
+
+}
+
+}
+
+@media(max-width:992px){
+
+.stats-card{
+
+    margin-bottom:20px;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.stats-card h2{
+
+    font-size:28px;
+
+}
+
+.stats-card i{
+
+    font-size:40px;
+
+}
+
+.card-header{
+
+    padding:15px;
+
+}
+
+.card-body{
+
+    padding:18px;
+
+}
+
+}
+
+@media(max-width:576px){
+
+.stats-card{
+
+    text-align:center;
+
+}
+
+.stats-card i{
+
+    display:block;
+
+    margin-top:15px;
+
+}
+
+.stats-card h2{
+
+    font-size:24px;
+
+}
+
+}

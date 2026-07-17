@@ -1,0 +1,182 @@
+/* ==========================================
+   RESPONSIVE DESIGN
+========================================== */
+
+/* ===========================
+   Large Screens (1400px+)
+=========================== */
+@media (min-width:1400px){
+    .content-area{
+        max-width:1350px;
+        margin:auto;
+    }
+}
+
+/* ===========================
+   Laptop (1200px)
+=========================== */
+@media (max-width:1200px){
+    .content-area{
+        padding:20px;
+    }
+    .stats-card h2{
+        font-size:30px;
+    }
+}
+
+/* ===========================
+   Tablet (992px)
+=========================== */
+@media (max-width:992px){
+    /* Corrected to target .main-content */
+    .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
+
+    /* Keeps your toggle working correctly */
+    .sidebar{
+        left:-270px;
+    }
+    .sidebar.active{
+        left:0;
+    }
+
+    .content-area{
+        padding:18px;
+    }
+    .stats-card{
+        margin-bottom:20px;
+    }
+    .table-responsive{
+        overflow-x:auto;
+    }
+    .navbar{
+        padding:12px 18px;
+    }
+    .search-box{
+        display:none;
+    }
+}
+
+/* ===========================
+   Small Tablet (768px)
+=========================== */
+@media (max-width:768px){
+    h2{
+        font-size:24px;
+    }
+    h3{
+        font-size:20px;
+    }
+    .content-area{
+        padding:15px;
+    }
+    .stats-card{
+        min-height:120px;
+    }
+    .stats-card h2{
+        font-size:28px;
+    }
+    .stats-card i{
+        font-size:45px;
+    }
+    .card-body{
+        padding:18px;
+    }
+    .btn{
+        padding:8px 15px;
+        font-size:14px;
+    }
+    .table thead{
+        font-size:13px;
+    }
+}
+
+/* ===========================
+   Mobile (576px)
+=========================== */
+@media (max-width:576px){
+    body{
+        font-size:14px;
+    }
+    .content-area{
+        padding:12px;
+    }
+    h2{
+        font-size:22px;
+    }
+    h3{
+        font-size:18px;
+    }
+    .card{
+        margin-bottom:18px;
+    }
+    .card-header{
+        font-size:16px;
+    }
+    .stats-card{
+        text-align:center;
+    }
+    .stats-card h2{
+        font-size:26px;
+    }
+    .stats-card i{
+        position:static;
+        display:block;
+        margin-top:12px;
+        opacity:.25;
+    }
+    .btn{
+        width:100%;
+        margin-bottom:10px;
+    }
+    .btn:last-child{
+        margin-bottom:0;
+    }
+    .table{
+        font-size:13px;
+    }
+    .table th,
+    .table td{
+        padding:10px;
+    }
+    .form-control,
+    .form-select{
+        height:44px;
+        font-size:14px;
+    }
+    textarea.form-control{
+        min-height:100px;
+    }
+    .navbar{
+        padding:10px;
+    }
+    .user-name{
+        display:none;
+    }
+}
+
+/* ===========================
+   Very Small Phones (400px)
+=========================== */
+@media (max-width:400px){
+    .content-area{
+        padding:8px;
+    }
+    h2{
+        font-size:20px;
+    }
+    .stats-card{
+        min-height:110px;
+    }
+    .stats-card h2{
+        font-size:22px;
+    }
+    .card-body{
+        padding:15px;
+    }
+    .table{
+        font-size:12px;
+    }
+}

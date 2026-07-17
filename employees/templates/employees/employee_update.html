@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block title %}
+Update Employee
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-warning text-dark">
+
+            <h3 class="mb-0">
+                Update Employee
+            </h3>
+
+        </div>
+
+        <div class="card-body">
+
+            <form method="POST"
+                  enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+                {% if form.errors %}
+
+                    <div class="alert alert-danger">
+
+                        <strong>Please correct the errors below.</strong>
+
+                    </div>
+
+                {% endif %}
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Phone Number</label>
+                        {{ form.phone_number }}
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">National ID</label>
+                        {{ form.national_id }}
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Gender</label>
+                        {{ form.gender }}
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Date of Birth</label>
+                        {{ form.date_of_birth }}
+                    </div>
+
+                    <div class="col-md-12 mb-3">
+                        <label class="form-label">Address</label>
+                        {{ form.address }}
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Job Title</label>
+                        {{ form.job_title }}
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Hire Date</label>
+                        {{ form.hire_date }}
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Profile Photo</label>
+                        {{ form.profile_photo }}
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Status</label>
+                        {{ form.status }}
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">
+                            Emergency Contact Name
+                        </label>
+                        {{ form.emergency_contact_name }}
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">
+                            Emergency Contact Phone
+                        </label>
+                        {{ form.emergency_contact_phone }}
+                    </div>
+
+                </div>
+
+                <div class="mt-4">
+
+                    <button type="submit"
+                            class="btn btn-warning">
+
+                        Update Employee
+
+                    </button>
+
+                    <a href="{% url 'employees:employee_detail' employee.pk %}"
+                       class="btn btn-secondary">
+
+                        Cancel
+
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

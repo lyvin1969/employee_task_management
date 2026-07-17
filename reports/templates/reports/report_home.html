@@ -1,0 +1,486 @@
+{% extends "base.html" %}
+
+{% block title %}
+Reports
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <!-- Page Header -->
+
+    <div class="d-flex justify-content-between align-items-center flex-wrap mb-4">
+
+        <div>
+
+            <h2 class="fw-bold">
+
+                <i class="bi bi-bar-chart-line-fill text-primary"></i>
+
+                Reports Dashboard
+
+            </h2>
+
+            <p class="text-muted">
+
+                Monitor system performance and task progress.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- Report Summary Cards -->
+
+    <div class="row g-4 mb-4">
+
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="card bg-primary text-white shadow-sm">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <h6>
+
+                                Total Tasks
+
+                            </h6>
+
+                            <h2 class="fw-bold">
+
+                                {{ total_tasks }}
+
+                            </h2>
+
+                        </div>
+
+
+                        <i class="bi bi-list-task fs-1 opacity-50"></i>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="card bg-success text-white shadow-sm">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <h6>
+
+                                Completed
+
+                            </h6>
+
+                            <h2 class="fw-bold">
+
+                                {{ completed_tasks }}
+
+                            </h2>
+
+                        </div>
+
+
+                        <i class="bi bi-check-circle-fill fs-1 opacity-50"></i>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="card bg-warning shadow-sm">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <h6>
+
+                                Pending
+
+                            </h6>
+
+                            <h2 class="fw-bold">
+
+                                {{ pending_tasks }}
+
+                            </h2>
+
+                        </div>
+
+
+                        <i class="bi bi-clock-fill fs-1 opacity-50"></i>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="card bg-danger text-white shadow-sm">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <h6>
+
+                                Overdue
+
+                            </h6>
+
+                            <h2 class="fw-bold">
+
+                                {{ overdue_tasks }}
+
+                            </h2>
+
+                        </div>
+
+
+                        <i class="bi bi-exclamation-triangle-fill fs-1 opacity-50"></i>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+        <!-- ==========================================
+         TASK STATUS SUMMARY
+    =========================================== -->
+
+    <div class="row">
+
+        <div class="col-lg-7">
+
+            <div class="card shadow-sm">
+
+                <div class="card-header">
+
+                    <h5 class="mb-0">
+
+                        <i class="bi bi-clipboard-data"></i>
+
+                        Task Status Summary
+
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="table-responsive">
+
+                        <table class="table table-hover align-middle">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>Status</th>
+
+                                    <th>Total</th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+
+                                    <td>
+
+                                        <span class="badge bg-warning">
+
+                                            Pending
+
+                                        </span>
+
+                                    </td>
+
+                                    <td>{{ pending_tasks }}</td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>
+
+                                        <span class="badge bg-info">
+
+                                            In Progress
+
+                                        </span>
+
+                                    </td>
+
+                                    <td>{{ in_progress_tasks }}</td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>
+
+                                        <span class="badge bg-primary">
+
+                                            Under Review
+
+                                        </span>
+
+                                    </td>
+
+                                    <td>{{ review_tasks }}</td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>
+
+                                        <span class="badge bg-success">
+
+                                            Completed
+
+                                        </span>
+
+                                    </td>
+
+                                    <td>{{ completed_tasks }}</td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>
+
+                                        <span class="badge bg-danger">
+
+                                            Overdue
+
+                                        </span>
+
+                                    </td>
+
+                                    <td>{{ overdue_tasks }}</td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Quick Report -->
+
+        <div class="col-lg-5">
+
+            <div class="card shadow-sm">
+
+                <div class="card-header">
+
+                    <h5 class="mb-0">
+
+                        <i class="bi bi-file-earmark-text-fill"></i>
+
+                        Quick Report
+
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <p>
+
+                        <strong>Total Employees:</strong>
+
+                        {{ employee_count }}
+
+                    </p>
+
+                    <p>
+
+                        <strong>Total Departments:</strong>
+
+                        {{ department_count }}
+
+                    </p>
+
+                    <p>
+
+                        <strong>Total Tasks:</strong>
+
+                        {{ total_tasks }}
+
+                    </p>
+
+                    <p>
+
+                        <strong>Completed Tasks:</strong>
+
+                        {{ completed_tasks }}
+
+                    </p>
+
+                    <p>
+
+                        <strong>Pending Tasks:</strong>
+
+                        {{ pending_tasks }}
+
+                    </p>
+
+                    <p>
+
+                        <strong>Overdue Tasks:</strong>
+
+                        {{ overdue_tasks }}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ==========================================
+         CHART PLACEHOLDER
+    =========================================== -->
+
+    <div class="card shadow-sm mt-4 mb-5">
+
+        <div class="card-header">
+
+            <h5 class="mb-0">
+
+                <i class="bi bi-pie-chart-fill"></i>
+
+                Task Performance Overview
+
+            </h5>
+
+        </div>
+
+        <div class="card-body d-flex flex-column align-items-center">
+
+            <!-- Wrapped chart in a container to constrain size and center it -->
+            <div style="position: relative; width: 100%; max-width: 400px; height: 350px;">
+                <canvas id="taskChart"></canvas>
+            </div>
+
+            <small class="text-muted d-block mt-3">
+
+                Task completion chart generated using Chart.js
+
+            </small>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Load Chart.js CDN Library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Render the Pie Chart -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const ctx = document.getElementById('taskChart').getContext('2d');
+        
+        // Fetch values directly from Django context variables. Default to 0 if none exist.
+        const pending = parseInt("{{ pending_tasks|default:0 }}") || 0;
+        const inProgress = parseInt("{{ in_progress_tasks|default:0 }}") || 0;
+        const underReview = parseInt("{{ review_tasks|default:0 }}") || 0;
+        const completed = parseInt("{{ completed_tasks|default:0 }}") || 0;
+        const overdue = parseInt("{{ overdue_tasks|default:0 }}") || 0;
+
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Pending', 'In Progress', 'Under Review', 'Completed', 'Overdue'],
+                datasets: [{
+                    data: [pending, inProgress, underReview, completed, overdue],
+                    backgroundColor: [
+                        '#ffc107', // yellow (Warning)
+                        '#0dcaf0', // cyan (Info)
+                        '#0d6efd', // blue (Primary)
+                        '#198754', // green (Success)
+                        '#dc3545'  // red (Danger)
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: {
+                                size: 13
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    });
+</script>
+
+{% endblock %}

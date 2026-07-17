@@ -1,0 +1,192 @@
+<div class="sidebar">
+
+    <!-- =======================================
+         Logo
+    ======================================== -->
+
+    <div class="sidebar-header text-center">
+
+        <div class="logo-icon">
+
+            <i class="bi bi-kanban-fill"></i>
+
+        </div>
+
+        <h4 class="mt-3 mb-1">
+
+            ETMS
+
+        </h4>
+
+        <small>
+
+            Employee Task Management System
+
+        </small>
+
+    </div>
+
+    <hr>
+
+    <!-- =======================================
+         Navigation
+    ======================================== -->
+
+    <ul class="nav flex-column sidebar-menu">
+
+        <li class="nav-item">
+
+            <a href="{% url 'dashboard:dashboard' %}"
+               class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
+
+                <i class="bi bi-speedometer2"></i>
+
+                <span>Dashboard</span>
+
+            </a>
+
+        </li>
+
+        <li class="nav-item">
+
+            <a href="{% url 'employees:employee_list' %}"
+               class="nav-link">
+
+                <i class="bi bi-people-fill"></i>
+
+                <span>Employees</span>
+
+            </a>
+
+        </li>
+
+        <!-- =======================================
+             Users Link - Only visible to Admins
+        ======================================== -->
+        {% if user.is_staff or user.is_superuser or user.role|lower == 'admin' %}
+        <li class="nav-item">
+
+            <a href="{% url 'accounts:user_list' %}"
+               class="nav-link">
+
+                <i class="bi bi-person-gear"></i>
+
+                <span>Users</span>
+
+            </a>
+
+        </li>
+        {% endif %}
+        <li class="nav-item">
+
+            <a href="{% url 'departments:department_list' %}"
+               class="nav-link">
+
+                <i class="bi bi-building"></i>
+
+                <span>Departments</span>
+
+            </a>
+
+        </li>
+
+        <li class="nav-item">
+
+            <a href="{% url 'tasks:task_list' %}"
+               class="nav-link">
+
+                <i class="bi bi-list-check"></i>
+
+                <span>Tasks</span>
+
+            </a>
+
+        </li>
+
+        <li class="nav-item">
+
+            <a href="{% url 'reports:report_home' %}"
+               class="nav-link">
+
+                <i class="bi bi-bar-chart-line-fill"></i>
+
+                <span>Reports</span>
+
+            </a>
+
+        </li>
+
+        <li class="nav-item">
+
+            <a href="#"
+               class="nav-link">
+
+                <i class="bi bi-bell-fill"></i>
+
+                <span>Notifications</span>
+
+            </a>
+
+        </li>
+
+        <li class="nav-item">
+
+            <a href="{% url 'accounts:profile' %}"
+               class="nav-link">
+
+                <i class="bi bi-person-circle"></i>
+
+                <span>My Profile</span>
+
+            </a>
+
+        </li>
+
+    </ul>
+
+    <!-- =======================================
+         Bottom Section
+    ======================================== -->
+
+    <div class="sidebar-footer">
+
+        <div class="user-box">
+
+            <div class="user-avatar">
+
+                <i class="bi bi-person-circle"></i>
+
+            </div>
+
+            <div>
+
+                <strong>
+
+                    {{ user.get_full_name|default:user.username }}
+
+                </strong>
+
+                <br>
+
+                <small>
+
+                    {{ user.role|default:"System User" }}
+
+                </small>
+
+            </div>
+
+        </div>
+
+        <a href="{% url 'accounts:logout' %}"
+           class="btn btn-danger w-100 mt-3">
+
+            <i class="bi bi-box-arrow-right"></i>
+
+            Logout
+
+        </a>
+
+    </div>
+
+</div>

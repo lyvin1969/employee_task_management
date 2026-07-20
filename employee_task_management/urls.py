@@ -2,8 +2,12 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
+from django.shortcuts import redirect
 
 urlpatterns = [
+    # Redirect root URL '/' directly to the dashboard
+    path("", lambda request: redirect("dashboard:dashboard")),
+
     path("admin/", admin.site.urls),
 
     path("accounts/", include("accounts.urls")),
@@ -18,9 +22,7 @@ urlpatterns = [
     
     path("reports/", include("reports.urls")),
     
-   path("dashboard/", include("dashboard.urls", namespace="dashboard")),
-    
-
+    path("dashboard/", include("dashboard.urls", namespace="dashboard")),
 ]
 
 

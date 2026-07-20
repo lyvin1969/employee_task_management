@@ -1,5 +1,4 @@
 from django.db.models import Q
-
 from .models import Task
 
 
@@ -57,17 +56,21 @@ class TaskService:
         """
         Search tasks.
         """
+        if not query:
+            return Task.objects.select_related("assigned_to", "assigned_by").all()
+
         return Task.objects.filter(
             Q(title__icontains=query)
             | Q(description__icontains=query)
-            | Q(assigned_to__first_name__icontains=query)
-            | Q(assigned_to__last_name__icontains=query)
+            | Q(assigned_to__user__first_name__icontains=query)
+            | Q(assigned_to__user__last_name__icontains=query)
+            | Q(assigned_to__user__username__icontains=query)
             | Q(priority__icontains=query)
             | Q(status__icontains=query)
         ).select_related(
             "assigned_to",
             "assigned_by",
-        )
+        ).distinct()
 
     @staticmethod
     def pending_tasks():

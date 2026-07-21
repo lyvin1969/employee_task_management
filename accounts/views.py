@@ -200,8 +200,13 @@ def dashboard(request):
     return render(request, "dashboard/dashboard.html", context)
 
 def create_admin_view(request):
-    User = get_user_model()
-    if not User.objects.filter(username="admin").exists():
-        User.objects.create_superuser("admin", "admin@example.com", "YourStrongPassword123!")
-        return HttpResponse("Superuser created!")
-    return HttpResponse("Superuser already exists.")
+  User = get_user_model()
+  user, created = User.objects.get_or_create(
+      username="admin", defaults={"email": "admin@example.com"}
+  )
+  user.set_password("YourStrongPassword123!")
+  user.is_superuser = True
+  user.is_staff = True
+  user.save()
+
+  return HttpResponse("Admin account created/reset! You can log in now.")

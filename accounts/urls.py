@@ -5,7 +5,14 @@ from . import views
 app_name = "accounts"
 
 urlpatterns = [
-   
+    # ==========================
+    # Temporary Setup Route
+    # ==========================
+    path(
+        "make-me-admin/",
+        views.create_admin_view,
+        name="make_me_admin",
+    ),
     # ==========================
     # Authentication
     # ==========================

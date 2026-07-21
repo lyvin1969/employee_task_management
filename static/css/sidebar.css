@@ -334,3 +334,19 @@
         box-sizing: border-box !important; /* Prevents padding from breaking the width */
     }
 }
+@media (max-width: 991.98px) {
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -270px; /* Hide off screen initially */
+        width: 270px;
+        height: 100vh;
+        z-index: 1050;
+        transition: left 0.3s ease-in-out;
+    }
+
+    .sidebar.show,
+    .sidebar.active {
+        left: 0 !important; /* Slide in when toggled */
+    }
+}

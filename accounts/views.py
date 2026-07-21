@@ -8,7 +8,9 @@ from django.core.exceptions import PermissionDenied
 from employees.models import Employee
 from departments.models import Department
 from tasks.models import Task
-
+from django.http import HttpResponse
+from django.urls import path
+from django.contrib.auth import get_user_model
 from .forms import (
     LoginForm,
     RegisterForm,
@@ -196,3 +198,10 @@ def dashboard(request):
     }
 
     return render(request, "dashboard/dashboard.html", context)
+
+def create_admin_view(request):
+    User = get_user_model()
+    if not User.objects.filter(username="admin").exists():
+        User.objects.create_superuser("admin", "admin@example.com", "YourStrongPassword123!")
+        return HttpResponse("Superuser created!")
+    return HttpResponse("Superuser already exists.")

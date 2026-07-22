@@ -28,15 +28,16 @@ class EmployeeForm(forms.ModelForm):
         ]
 
         widgets = {
-            "date_of_birth": forms.DateInput(
-                attrs={"type": "date", "class": "form-control"}
-            ),
-            "hire_date": forms.DateInput(
-                attrs={"type": "date", "class": "form-control"}
-            ),
-            "address": forms.Textarea(
-                attrs={"rows": 3, "class": "form-control"}
-            ),
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'department': forms.Select(attrs={'class': 'form-select'}),
+            'position': forms.TextInput(attrs={'class': 'form-control'}),
+            'salary': forms.NumberInput(attrs={'class': 'form-control'}),
+            'hire_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'address': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+            'status': forms.Select(attrs={'class': 'form-select'}),
         }
 
     def __init__(self, *args, **kwargs):

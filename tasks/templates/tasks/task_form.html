@@ -11,239 +11,122 @@ Create Task
 {% block content %}
 
 <div class="container-fluid">
-
     <div class="row justify-content-center">
-
         <div class="col-xl-10 col-lg-11">
-
             <div class="card shadow-lg border-0">
-
                 <div class="card-header bg-primary text-white py-3">
-
                     {% if task %}
-
                         <h3 class="mb-0">
-
                             <i class="bi bi-pencil-square me-2"></i>
-
                             Update Task
-
                         </h3>
-
                     {% else %}
-
                         <h3 class="mb-0">
-
                             <i class="bi bi-plus-circle me-2"></i>
-
                             Create New Task
-
                         </h3>
-
                     {% endif %}
-
                 </div>
 
                 <div class="card-body">
+                    <!-- Display Validation Errors -->
+                    {% if form.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Please fix the following issues:</strong>
+                            <ul class="mb-0 mt-2">
+                                {% for field, errors in form.errors.items %}
+                                    {% for error in errors %}
+                                        <li><strong>{{ field|title }}:</strong> {{ error }}</li>
+                                    {% endfor %}
+                                {% endfor %}
+                            </ul>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endif %}
 
                     <form method="POST">
-
                         {% csrf_token %}
-
                         <div class="row g-3">
-
                             <div class="col-md-6">
-
-                                <label class="form-label fw-semibold">
-
-                                    Task Title
-
-                                </label>
-
+                                <label class="form-label fw-semibold">Task Title</label>
                                 {{ form.title }}
-
                             </div>
 
                             <div class="col-md-6">
-
-                                <label class="form-label fw-semibold">
-
-                                    Assign To
-
-                                </label>
-
+                                <label class="form-label fw-semibold">Assign To</label>
                                 {{ form.assigned_to }}
-
                             </div>
 
                             <div class="col-md-6">
-
-                                <label class="form-label fw-semibold">
-
-                                    Priority
-
-                                </label>
-
+                                <label class="form-label fw-semibold">Priority</label>
                                 {{ form.priority }}
-
                             </div>
 
                             <div class="col-md-6">
-
-                                <label class="form-label fw-semibold">
-
-                                    Status
-
-                                </label>
-
+                                <label class="form-label fw-semibold">Status</label>
                                 {{ form.status }}
-
                             </div>
 
                             <div class="col-md-6">
-
-                                <label class="form-label fw-semibold">
-
-                                    Progress (%)
-
-                                </label>
-
+                                <label class="form-label fw-semibold">Progress (%)</label>
                                 {{ form.progress }}
-
                             </div>
 
                             <div class="col-md-6">
-
-                                <label class="form-label fw-semibold">
-
-                                    Active
-
-                                </label>
-
-                                {{ form.is_active }}
-
+                                <label class="form-label fw-semibold">Active</label>
+                                <div class="pt-2">
+                                    {{ form.is_active }}
+                                </div>
                             </div>
 
                             <div class="col-md-6">
-
-                                <label class="form-label fw-semibold">
-
-                                    Start Date
-
-                                </label>
-
+                                <label class="form-label fw-semibold">Start Date</label>
                                 {{ form.start_date }}
-
                             </div>
 
                             <div class="col-md-6">
-
-                                <label class="form-label fw-semibold">
-
-                                    Due Date
-
-                                </label>
-
+                                <label class="form-label fw-semibold">Due Date</label>
                                 {{ form.due_date }}
-
                             </div>
 
                             <div class="col-md-6">
-
-                                <label class="form-label fw-semibold">
-
-                                    Completed Date
-
-                                </label>
-
+                                <label class="form-label fw-semibold">Completed Date</label>
                                 {{ form.completed_date }}
-
-                            </div>
-                                                        <div class="col-12">
-
-                                <label class="form-label fw-semibold">
-
-                                    Description
-
-                                </label>
-
-                                {{ form.description }}
-
                             </div>
 
                             <div class="col-12">
-
-                                <label class="form-label fw-semibold">
-
-                                    Remarks
-
-                                </label>
-
-                                {{ form.remarks }}
-
+                                <label class="form-label fw-semibold">Description</label>
+                                {{ form.description }}
                             </div>
 
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Remarks</label>
+                                {{ form.remarks }}
+                            </div>
                         </div>
 
                         <hr class="my-4">
 
                         <div class="d-flex justify-content-between">
-
-                            <a href="{% url 'tasks:task_list' %}"
-                               class="btn btn-secondary">
-
-                                <i class="bi bi-arrow-left-circle"></i>
-
-                                Back
-
+                            <a href="{% url 'tasks:task_list' %}" class="btn btn-secondary">
+                                <i class="bi bi-arrow-left-circle"></i> Back
                             </a>
 
                             {% if task %}
-
-                                <button type="submit"
-                                        class="btn btn-warning">
-
-                                    <i class="bi bi-check-circle-fill"></i>
-
-                                    Update Task
-
+                                <button type="submit" class="btn btn-warning">
+                                    <i class="bi bi-check-circle-fill"></i> Update Task
                                 </button>
-
                             {% else %}
-
-                                <button type="submit"
-                                        class="btn btn-primary">
-
-                                    <i class="bi bi-plus-circle-fill"></i>
-
-                                    Create Task
-
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-plus-circle-fill"></i> Create Task
                                 </button>
-
                             {% endif %}
-
                         </div>
-
                     </form>
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
 </div>
-<!-- Add this near the top of your form to display any validation errors -->
-{% if form.errors %}
-    <div class="alert alert-danger">
-        <ul>
-            {% for field, errors in form.errors.items %}
-                <li><strong>{{ field }}:</strong> {{ errors|strip_tags }}</li>
-            {% endfor %}
-        </ul>
-    </div>
-{% endif %}
 
 {% endblock %}

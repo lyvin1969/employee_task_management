@@ -235,5 +235,15 @@ Create Task
     </div>
 
 </div>
+<!-- Add this near the top of your form to display any validation errors -->
+{% if form.errors %}
+    <div class="alert alert-danger">
+        <ul>
+            {% for field, errors in form.errors.items %}
+                <li><strong>{{ field }}:</strong> {{ errors|strip_tags }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
 
 {% endblock %}

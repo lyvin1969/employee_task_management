@@ -7,230 +7,141 @@ Employee Form
 {% block content %}
 
 <div class="container-fluid">
-
     <div class="row justify-content-center">
-
         <div class="col-lg-10">
-
             <div class="card shadow-sm">
-
                 <div class="card-header bg-primary text-white">
-
                     <h4 class="mb-0">
-
                         <i class="bi bi-person-plus-fill"></i>
-
                         {% if form.instance.pk %}
-
                             Update Employee
-
                         {% else %}
-
                             Add New Employee
-
                         {% endif %}
-
                     </h4>
-
                 </div>
 
                 <div class="card-body">
+                    <!-- Display Form Errors -->
+                    {% if form.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Please fix the following errors:</strong>
+                            <ul class="mb-0 mt-2">
+                                {% for field, errors in form.errors.items %}
+                                    {% for error in errors %}
+                                        <li><strong>{{ field|title }}:</strong> {{ error }}</li>
+                                    {% endfor %}
+                                {% endfor %}
+                            </ul>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endif %}
 
                     <form method="POST" enctype="multipart/form-data">
-
                         {% csrf_token %}
 
                         <div class="row">
-
+                            <!-- User Field (Shown during creation) -->
+                            {% if form.user %}
                             <div class="col-md-6 mb-3">
-
-                                <label class="form-label">
-
-                                    First Name
-
-                                </label>
-
-                                {{ form.first_name }}
-
+                                <label class="form-label font-weight-bold">User Account</label>
+                                {{ form.user }}
                             </div>
+                            {% endif %}
 
+                            <!-- Employee Number (Shown during creation) -->
+                            {% if form.employee_number %}
                             <div class="col-md-6 mb-3">
-
-                                <label class="form-label">
-
-                                    Last Name
-
-                                </label>
-
-                                {{ form.last_name }}
-
+                                <label class="form-label font-weight-bold">Employee Number</label>
+                                {{ form.employee_number }}
                             </div>
+                            {% endif %}
 
                             <div class="col-md-6 mb-3">
-
-                                <label class="form-label">
-
-                                    Email Address
-
-                                </label>
-
-                                {{ form.email }}
-
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-
-                                <label class="form-label">
-
-                                    Phone Number
-
-                                </label>
-
+                                <label class="form-label font-weight-bold">Phone Number</label>
                                 {{ form.phone_number }}
-
                             </div>
 
                             <div class="col-md-6 mb-3">
-
-                                <label class="form-label">
-
-                                    Department
-
-                                </label>
-
-                                {{ form.department }}
-
+                                <label class="form-label font-weight-bold">National ID</label>
+                                {{ form.national_id }}
                             </div>
 
                             <div class="col-md-6 mb-3">
-
-                                <label class="form-label">
-
-                                    Position
-
-                                </label>
-
-                                {{ form.position }}
-
+                                <label class="form-label font-weight-bold">Gender</label>
+                                {{ form.gender }}
                             </div>
 
                             <div class="col-md-6 mb-3">
+                                <label class="form-label font-weight-bold">Date of Birth</label>
+                                {{ form.date_of_birth }}
+                            </div>
 
-                                <label class="form-label">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label font-weight-bold">Job Title</label>
+                                {{ form.job_title }}
+                            </div>
 
-                                    Hire Date
-
-                                </label>
-
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label font-weight-bold">Hire Date</label>
                                 {{ form.hire_date }}
-
                             </div>
 
                             <div class="col-md-6 mb-3">
+                                <label class="form-label font-weight-bold">Status</label>
+                                {{ form.status }}
+                            </div>
 
-                                <label class="form-label">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label font-weight-bold">Profile Photo</label>
+                                {{ form.profile_photo }}
+                            </div>
 
-                                    Salary
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label font-weight-bold">Emergency Contact Name</label>
+                                {{ form.emergency_contact_name }}
+                            </div>
 
-                                </label>
-
-                                {{ form.salary }}
-
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label font-weight-bold">Emergency Contact Phone</label>
+                                {{ form.emergency_contact_phone }}
                             </div>
 
                             <div class="col-12 mb-3">
-
-                                <label class="form-label">
-
-                                    Address
-
-                                </label>
-
+                                <label class="form-label font-weight-bold">Address</label>
                                 {{ form.address }}
-
                             </div>
 
-                            <div class="col-md-6 mb-3">
-
-                                <label class="form-label">
-
-                                    Profile Picture
-
-                                </label>
-
-                                {{ form.profile_picture }}
-
+                            <div class="col-12">
+                                <hr class="my-4">
                             </div>
-                            <div class="col-md-6 mb-3">
 
-    <label class="form-label">
+                            <div class="col-12 d-flex justify-content-between align-items-center">
+                                <a href="{% url 'employees:employee_list' %}" class="btn btn-outline-secondary">
+                                    <i class="bi bi-arrow-left-circle"></i> Back to Employees
+                                </a>
 
-        Status
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    {% if form.instance.pk %}
+                                        Update Employee
+                                    {% else %}
+                                        Save Employee
+                                    {% endif %}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
 
-    </label>
-
-    {{ form.is_active }}
-
-</div>
-
-<div class="col-12">
-
-    <hr class="my-4">
-
-</div>
-
-<div class="col-12 d-flex justify-content-between align-items-center">
-
-    <a href="{% url 'employees:employee_list' %}"
-       class="btn btn-outline-secondary">
-
-        <i class="bi bi-arrow-left-circle"></i>
-
-        Back to Employees
-
-    </a>
-
-    <button type="submit"
-            class="btn btn-primary">
-
-        <i class="bi bi-check-circle-fill"></i>
-
-        {% if form.instance.pk %}
-
-            Update Employee
-
-        {% else %}
-
-            Save Employee
-
-        {% endif %}
-
-    </button>
-
-</div>
-
-</div>
-
-</form>
-
-</div>
-
-<div class="card-footer bg-light">
-
-    <small class="text-muted">
-
-        Complete all required employee details before saving. You can edit this information later if needed.
-
-    </small>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
+                <div class="card-footer bg-light">
+                    <small class="text-muted">
+                        Complete all required employee details before saving. You can edit this information later if needed.
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

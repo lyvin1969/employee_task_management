@@ -1,0 +1,49 @@
+/* Ensure grid has appropriate gap and padding */
+.stat-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Fix text clipping inside stat cards */
+.stat-card {
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem !important; /* Adds inner breathing room */
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* Ensure text doesn't overflow or shift off-screen */
+.stat-card .card-title,
+.stat-card p,
+.stat-card h3 {
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: left;
+    color: #ffffff; /* Ensures contrast on colored backgrounds */
+}
+
+/* Title styling */
+.stat-card .card-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0.9;
+    margin-bottom: 0.5rem !important;
+}
+
+/* Number display styling */
+.stat-card .card-value {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+/* Large decorative icon alignment on the right */
+.stat-card .card-icon {
+    font-size: 2.5rem;
+    opacity: 0.3;
+}

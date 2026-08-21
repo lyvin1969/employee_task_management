@@ -20,6 +20,11 @@ Dashboard
         </div>
 
         <div class="d-flex gap-2 flex-wrap">
+            <!-- PRINT BUTTON -->
+            <button onclick="window.print()" class="btn btn-outline-secondary shadow-sm d-print-none">
+                <i class="bi bi-printer-fill me-1"></i> Print
+            </button>
+
             <a href="{% url 'employees:create_employee' %}" class="btn btn-primary shadow-sm">
                 <i class="bi bi-person-plus me-1"></i> Employee
             </a>
@@ -129,7 +134,7 @@ Dashboard
         </div>
 
         <!-- Quick Actions -->
-        <div class="col-lg-6">
+        <div class="col-lg-6 d-print-none">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-header bg-white py-3 border-0">
                     <h5 class="mb-0 fw-bold text-dark">
@@ -243,5 +248,41 @@ Dashboard
     </div>
 
 </div>
+
+<!-- PRINT CSS STYLES -->
+<style>
+@media print {
+    /* Hide navigation, sidebar, quick actions, and buttons */
+    .sidebar,
+    .navbar,
+    .top-bar,
+    .d-print-none,
+    nav,
+    header {
+        display: none !important;
+    }
+
+    /* Force full page width */
+    body, .main-content, .container-fluid {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #fff !important;
+    }
+
+    /* Keep card styles clean on printed paper */
+    .card {
+        border: 1px solid #ddd !important;
+        box-shadow: none !important;
+        break-inside: avoid;
+    }
+
+    /* Keep background colors on print preview */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+}
+</style>
 
 {% endblock %}
